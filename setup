@@ -1,0 +1,26 @@
+#!/bin/sh
+
+THIS_SCRIPT=$0
+THIS_DIR=$(dirname $0)
+
+check_root() {
+  if [ "$(whoami)" != "root" ]; then
+    echo "Must be run as root"
+    exit 1
+  fi
+}
+
+install_zerotier_one() {
+  gpg --import ${THIS_DIR}/0x1657198823E52A61
+
+
+  if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bash; fi
+}
+
+join_zerotier_one_network() {
+  zerotier-cli join 8056c2e21cdea232
+}
+
+check_root
+install_zerotier_one
+join_zerotier_one_network
