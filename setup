@@ -11,7 +11,7 @@ check_root() {
 }
 
 install_zerotier_one() {
-  gpg --import ${THIS_DIR}/0x1657198823E52A61
+  gpg --import ${THIS_DIR}/config/0x1657198823E52A61
 
 
   if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bash; fi
